@@ -130,3 +130,55 @@ printCamino([X|T]) :-
     write(X),
     write(', '),
     printCamino(T).
+
+
+
+
+
+% -------------------------------------------------------------------------------------------
+% EJERCICO 2
+% -------------------------------------------------------------------------------------------
+
+
+
+
+% Hechos
+ataque(denegacion_servicio) :-
+  causa(ataque(denegacion_servicio), intensidad(alta)),
+  causa(ataque(denegacion_servicio), objetivo(sistema)),
+  causa(ataque(denegacion_servicio), herramienta(bots)).
+
+ataque(phishing) :-
+  causa(ataque(phishing), intensidad(media)),
+  causa(ataque(phishing), objetivo(usuarios)),
+  causa(ataque(phishing), herramienta(correo_electronico)).
+
+ataque(malware) :-
+  causa(ataque(malware), intensidad(alta)),
+  causa(ataque(malware), objetivo(sistema)),
+  causa(ataque(malware), herramienta(descarga_archivos)).
+
+% Reglas
+causa(ataque(X), intensidad(Y)) :-
+  intensidad(X, Y).
+
+causa(ataque(X), objetivo(Y)) :-
+  objetivo(X, Y).
+
+causa(ataque(X), herramienta(Y)) :-
+  herramienta(X, Y).
+
+% Intensidad
+intensidad(ataque(denegacion_servicio), alta).
+intensidad(ataque(phishing), media).
+intensidad(ataque(malware), alta).
+
+% Objetivo
+objetivo(ataque(denegacion_servicio), sistema).
+objetivo(ataque(phishing), usuarios).
+objetivo(ataque(malware), sistema).
+
+% Herramienta
+herramienta(ataque(denegacion_servicio), bots).
+herramienta(ataque(phishing), correo_electronico).
+herramienta(ataque(malware), descarga_archivos).
