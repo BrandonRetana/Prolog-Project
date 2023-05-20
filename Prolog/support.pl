@@ -1,14 +1,5 @@
 % Base de conocimiento para soporte técnico de software
 
-% Atributos
-atributo(reinicio_del_sistema).
-atributo(verificación_de_conexiones).
-atributo(actualización_del_software).
-atributo(reinstalación_del_software).
-atributo(limpieza_de_archivos_temporales).
-atributo(verificación_de_recursos_del_sistema).
-atributo(análisis_de_logs).
-
 % Resultados de diagnóstico
 diagnostico(demora_del_sistema, [reinicio_del_sistema, verificación_de_conexiones, limpieza_de_archivos_temporales]).
 diagnostico(error_de_conexión, [verificación_de_conexiones, reinicio_del_sistema]).

@@ -16,18 +16,6 @@ conection(f,j,3).
 conection(g,j,1).
 conection(h,f,1).
 conection(h,i,6).
-conection_inv(b,a,10).
-conection_inv(c,b,3).
-conection_inv(e,b,5).
-conection_inv(d,b,4).
-conection_inv(h,e,2).
-conection_inv(h,d,1).
-conection_inv(f,c,2).
-conection_inv(i,f,3).
-conection_inv(j,f,3).
-conection_inv(j,g,1).
-conection_inv(f,h,1).
-conection_inv(i,h,6).
 percentage(a, b, 5.0).
 percentage(b, c, 1.0).
 percentage(b, e, 2.0).
@@ -79,30 +67,6 @@ caminoMasCorto(A, B) :-
     printpercentage(Camino1, Comision1),
     writef(' (con distancia de %d km y una comision de %d%)\n', [Costo1, Comision1]).
 
-% -------------------------------------------------------------------------------------------
-% FUNCION RECURSIVA CAMINO INVERSO QUE VA CONECTANDO LOS NODOS
-% -------------------------------------------------------------------------------------------
-camino_inv(A, B, [A, B], X) :-
-    conection_inv(A, B, X).
-camino_inv(A, B, CaminoAB, Largo) :-
-    conection_inv(A, C, X),
-    camino_inv(C, B, CaminoCB, LargoCB),
-    CaminoAB = [A | CaminoCB],
-    Largo is X + LargoCB.
-
-
-% -------------------------------------------------------------------------------------------
-% FUNCION PRINCIPAL PARA EL CAMINO INVERTIDO QUE SE LLAMA EN LA INTERFAZ, ORDENA EL CAMINO Y LO IMPRIME AL USUARIO, LLAMA A LA FUNCION CAMINO INVERTIDO
-% -------------------------------------------------------------------------------------------
-caminoMasCorto_inv(A, B) :-
-    findall(p(Costo, Camino),
-            camino_inv(A, B, Camino, Costo),
-            Caminos),
-    sort(Caminos, Lista),
-    Lista = [p(Costo1, Camino1) | _],
-    printCamino(Camino1),
-    printpercentage(Camino1, Comision1),
-    writef(' (con distancia de %d km y una comision de %d%)\n', [Costo1, Comision1]).
 
 % -------------------------------------------------------------------------------------------
 % FUNCION RECURSIVA QUE RECORRE LA LISTA DEL CAMINO SOLUCION E IMPRIME EL COSTO EN percentage
@@ -131,54 +95,3 @@ printCamino([X|T]) :-
     write(', '),
     printCamino(T).
 
-
-
-
-
-% -------------------------------------------------------------------------------------------
-% EJERCICO 2
-% -------------------------------------------------------------------------------------------
-
-
-
-
-% Hechos
-ataque(denegacion_servicio) :-
-  causa(ataque(denegacion_servicio), intensidad(alta)),
-  causa(ataque(denegacion_servicio), objetivo(sistema)),
-  causa(ataque(denegacion_servicio), herramienta(bots)).
-
-ataque(phishing) :-
-  causa(ataque(phishing), intensidad(media)),
-  causa(ataque(phishing), objetivo(usuarios)),
-  causa(ataque(phishing), herramienta(correo_electronico)).
-
-ataque(malware) :-
-  causa(ataque(malware), intensidad(alta)),
-  causa(ataque(malware), objetivo(sistema)),
-  causa(ataque(malware), herramienta(descarga_archivos)).
-
-% Reglas
-causa(ataque(X), intensidad(Y)) :-
-  intensidad(X, Y).
-
-causa(ataque(X), objetivo(Y)) :-
-  objetivo(X, Y).
-
-causa(ataque(X), herramienta(Y)) :-
-  herramienta(X, Y).
-
-% Intensidad
-intensidad(ataque(denegacion_servicio), alta).
-intensidad(ataque(phishing), media).
-intensidad(ataque(malware), alta).
-
-% Objetivo
-objetivo(ataque(denegacion_servicio), sistema).
-objetivo(ataque(phishing), usuarios).
-objetivo(ataque(malware), sistema).
-
-% Herramienta
-herramienta(ataque(denegacion_servicio), bots).
-herramienta(ataque(phishing), correo_electronico).
-herramienta(ataque(malware), descarga_archivos).
