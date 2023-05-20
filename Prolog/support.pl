@@ -13,6 +13,30 @@ diagnostico(errores_en_logs, [análisis_de_logs, verificación_de_conexiones]).
 diagnostico(problema_de_red, [verificación_de_conexiones, reinicio_del_sistema]).
 
 % Reglas
+soluciones_para_problemas([], []).
+soluciones_para_problemas([Problema | Resto], [Solucion | SolucionesResto]) :-
+    diagnostico(Problema, Acciones),
+    Diagnostico = Problema, % En este caso, asumimos que el diagnóstico es el mismo que el problema
+    format(atom(Solucion), "Posible diagnóstico: ~w\nAcciones recomendadas:\n~w\n", [Diagnostico, Acciones]),
+    soluciones_para_problemas(Resto, SolucionesResto).
+
+% Ejemplo de función diagnostico/2
+diagnostico(problema1, ['Acción 1', 'Acción 2']).
+diagnostico(problema2, ['Acción 3', 'Acción 4']).
+
+% Función para imprimir las soluciones de manera bonita
+imprimir_soluciones([]).
+imprimir_soluciones([Solucion | SolucionesResto]) :-
+    writeln(Solucion),
+    writeln('------------------------------------'),
+    imprimir_soluciones(SolucionesResto).
+
+% Ejemplo de uso
+%ejemplo :-
+%    soluciones_para_problemas([problema1, problema2], Soluciones),
+%    imprimir_soluciones(Soluciones).
+
+
 solucion(X) :-
     diagnostico(X, _),
     write('Posible diagnóstico: '), write(X), nl,
