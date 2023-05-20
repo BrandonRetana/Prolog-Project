@@ -48,7 +48,7 @@ camino(A, B, CaminoAB, Largo) :-
     Largo is X + LargoCB.
 
 
-% FUNCION PRINCIPAL QUE SE LLAMA EN LA INTERFAZ, ORDENA EL CAMINO Y LO IMPRIME AL USUARIO, LLAMA A LA FUNCION CAMINO
+% FUNCION PRINCIPAL QUE BUSCA EL CAMINO MAS CORTO ENTRE DOS NODOS
 shortestPath(A, B) :-
     findall(p(Costo, Camino),
             camino(A, B, Camino, Costo),
@@ -60,7 +60,7 @@ shortestPath(A, B) :-
     writef(' (con distancia de %d km y una comision de %d%)\n', [Costo1, Comision1]).
 
 
-% FUNCION RECURSIVA QUE RECORRE LA LISTA DEL CAMINO SOLUCION E IMPRIME EL COSTO EN percentage
+% FUNCION RECURSIVA QUE RECORRE LA LISTA DEL CAMINO SOLUCION E IMPRIME EL COSTO TOTAL EN PORCENTAJE
 printpercentage([], 0).
 printpercentage([X|T], Y) :-
 	car(T, Cabeza),
@@ -69,7 +69,7 @@ printpercentage([X|T], Y) :-
     Y is Comision + C.
 
 
-% EXTRAE LA CABEZA DE UNA LISTA, SE USA EN PRINT percentage
+% EXTRAE LA CABEZA DE UNA LISTA
 car([], []).
 car([X|Y], X).
 
