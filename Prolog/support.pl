@@ -17,7 +17,7 @@ soluciones_para_problemas([], []).
 soluciones_para_problemas([Problema | Resto], [Solucion | SolucionesResto]) :-
     diagnostico(Problema, Acciones),
     Diagnostico = Problema, % En este caso, asumimos que el diagnostico es el mismo que el problema
-    format(atom(Solucion), "Posible diagnostico: ~w\nAcciones recomendadas:\n~w\n", [Diagnostico, Acciones]),
+    format(atom(Solucion), "\nPosible diagnostico: ~w\nAcciones recomendadas:\n~w\n", [Diagnostico, Acciones]),
     soluciones_para_problemas(Resto, SolucionesResto).
 
 
