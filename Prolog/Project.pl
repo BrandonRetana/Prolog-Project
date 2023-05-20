@@ -23,18 +23,6 @@ percentage(f, j, 2.0).
 percentage(g, j, 0.5).
 percentage(h, f, 0.5).
 percentage(h, i, 3.0).
-percentage(b, a, 5.0).
-percentage(c, b, 1.0).
-percentage(e, b, 2.0).
-percentage(d, b, 2.0).
-percentage(h, e, 1.0).
-percentage(h, d, 0.5).
-percentage(f, c, 1.0).
-percentage(i, f, 2.0).
-percentage(j, f, 2.0).
-percentage(j, g, 0.5).
-percentage(f, h, 0.5).
-percentage(i, h, 3.0).
 percentage(_ , [], 0.0).
 
 
